@@ -1,6 +1,7 @@
 package com.michaelfitzmaurice.search;
 
 import static java.lang.String.format;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -119,6 +121,49 @@ public class IndexTest {
 			format("Search results are missing file '%s';", 
 					filename);
 		assertTrue( failMsg, Arrays.asList(matches).contains(file) );
+	}
+	
+//	def rev(l):
+//	    if len(l) == 1: return l
+//	    return [l[-1]] + rev(l[:-1])
+	
+	@Test
+	public void reversesArraysWithMoreThanOneElement() {
+		
+		int[] original = {1, 2, 3, 4, 5};
+		int[] expected = {5, 4, 3, 2, 1};
+		int[] reversed = reverse(original);
+		assertArrayEquals(expected, reversed);
+	}
+	
+	@Test
+	public void reversesSingleElementArrayToItself() {
+		
+		int[] original = {5};
+		int[] reversed = reverse(original);
+		assertArrayEquals(original, reversed);
+	}
+	
+	private int[] reverse(int[] array) { 
+		
+		if (array.length == 1) {
+			return array;
+		} else {
+			int lastElement = array[array.length - 1];
+			
+			int[] remainder = new int[array.length - 1];
+			System.arraycopy(array, 0, remainder, 0, array.length - 1);
+			int[] reversedRemainder = reverse(remainder);
+			
+			int[] combined = new int[array.length];
+			combined[0] = lastElement;
+			System.arraycopy(reversedRemainder, 
+							0, 
+							combined, 
+							1, 
+							reversedRemainder.length);
+			return combined;
+		}
 	}
 
 	///////////////////////////////////////////////////////
