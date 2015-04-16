@@ -61,15 +61,6 @@ public class PrimesTest {
 	@Test
 	public void largePrimePerformance() {
 		assertTrue( primes.isPrime(49_979_687) );
-//		assertFalse( primes.isPrime(49_979_689) );
 	}
 	
-	@Test
-	public void squares() {
-		
-		double root = Math.sqrt(23);
-		System.out.println(root);
-		System.out.println( Math.round(root) );
-	}
-
 }
