@@ -1,5 +1,7 @@
 package com.michaelfitzmaurice.katas.romannumerals;
 
+import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.TreeMap;
 
@@ -38,6 +40,27 @@ public class RomanNumerals2 extends RomanNumerals {
 		}
 		
 		return romanNumerals.toString();
+	}
+
+	@Override
+	public int fromRomanNumerals(String romanNumerals) {
+		
+		int arabicNumber = 0;
+		
+		NavigableMap<Integer, String> numeralValues = 
+			numeralsMap.descendingMap();
+		String romanNumeralsRemaining = new String(romanNumerals);
+			
+		for ( Entry<Integer, String> mapEntry : numeralValues.entrySet() ) {
+			String romanNumeral = mapEntry.getValue();
+			while ( romanNumeralsRemaining.startsWith(romanNumeral) ) {
+				arabicNumber += mapEntry.getKey();
+				romanNumeralsRemaining = 
+					romanNumeralsRemaining.substring( romanNumeral.length() );
+			}
+		}
+		
+		return arabicNumber;
 	}
 	
 }

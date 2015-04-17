@@ -29,4 +29,8 @@ public class RomanNumerals {
 		
 		return romanNumerals.toString();
 	}
+	
+	public int fromRomanNumerals(String romanNumerals) {
+		return -1;
+	}
 }
